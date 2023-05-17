@@ -18,12 +18,17 @@
     <select id="getDirector" resultType="com.movie.movies11.models.People">
         SELECT people.id, people.name, people.birth
         FROM directors, people, movies
-        WHERE directors.person_id = people.id AND directors.movie_id = movies.id AND movies.title = #{movieName};
+        WHERE directors.person_id = people.id
+          AND directors.movie_id = movies.id
+          AND movies.title = #{movieName}
     </select>
 
+    <!-- GET actor by movie -->
     <select id="getActorsByMovie" resultType="com.movie.movies11.models.People">
         select people.id, people.name, people.birth
         from stars, people, movies
-        where stars.person_id = people.id and stars.movie_id = movies.id and movies.title = 'The Girls from Thunder Strip';
+        where stars.person_id = people.id
+          and stars.movie_id = movies.id
+          and movies.title = 'The Girls from Thunder Strip'
     </select>
 </mapper>
