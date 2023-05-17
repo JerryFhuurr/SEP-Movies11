@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.movie.movies11.sqlMapper.PeopleMapper">
+    <!-- GET All people -->
+    <select id="getAllPeople" resultType="com.movie.movies11.models.People">
+        SELECT *
+        FROM people
+    </select>
+
+    <!-- GET people by id and name -->
+    <select id="getPeople" resultType="com.movie.movies11.models.People" parameterType="com.movie.movies11.models.People">
+        SELECT *
+        FROM people
+        WHERE id = #{id} OR name = #{name}
+    </select>
+</mapper>
