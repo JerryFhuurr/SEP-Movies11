@@ -20,4 +20,14 @@ public class PeopleServiceImpl implements PeopleService {
     public List<People> getPeople(People people) {
         return peopleMapper.getPeople(people);
     }
+
+    @Override
+    public People getDirector(String movieTitle) {
+        return peopleMapper.getDirector(movieTitle);
+    }
+
+    @Override
+    public List<People> getActorsByMovie(String movieTitle) {
+        return peopleMapper.getActorsByMovie(movieTitle);
+    }
 }

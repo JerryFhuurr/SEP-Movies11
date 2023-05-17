@@ -29,4 +29,14 @@ public class PeopleController {
     public List<People> getPeopleByIdOrName(@RequestBody People people) {
         return peopleService.getPeople(people);
     }
+
+    @GetMapping("getDirector")
+    public People getDirector(String movieTitle) {
+        return peopleService.getDirector(movieTitle);
+    }
+
+    @GetMapping("getActors")
+    public List<People> getActorsByMovie(String movieTitle) {
+        return peopleService.getActorsByMovie(movieTitle);
+    }
 }
