@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.movie.movies11.sqlMapper.RatingMapper">
+    <resultMap id="movieInRating" type="com.movie.movies11.models.Rating">
+        <result property="ratings" column="rating" />
+        <result property="votes" column="votes" />
+        <association property="movie" column="movie_id" javaType="com.movie.movies11.models.Movie">
+            <id property="id" column="id" />
+            <result property="title" column="title" />
+            <result property="year" column="year" />
+        </association>
+    </resultMap>
+    <select id="getRating" resultMap="movieInRating" resultType="com.movie.movies11.models.Rating">
+        select r.rating, r.votes, m.id, m.title, m.year
+        from movies m, ratings r
+        where r.movie_id = #{id} and r.movie_id = m.id
+    </select>
+
+    <update id="addARating" parameterType="com.movie.movies11.models.Rating">
+        UPDATE ratings
+        <set>
+            votes = ratings.votes + 1, rating = (ratings.rating * votes + #{ratings}) / votes
+        </set>
+        WHERE movie_id = #{movie.id}
+    </update>
+
+    <update id="removeARating" parameterType="com.movie.movies11.models.Rating">
+        UPDATE ratings
+        <set>
+            votes = ratings.votes - 1, rating = (ratings.rating * votes - #{ratings}) / votes
+        </set>
+        WHERE movie_id = #{movie.id}
+    </update>
+</mapper>
