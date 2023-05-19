@@ -38,4 +38,12 @@
             #{movieId},
         </trim>
     </insert>
+
+    <!-- delete movies from list -->
+    <delete id="removeFromMovieList">
+        DELETE
+        FROM public.favourite_movie
+        WHERE userid = #{userId}
+          AND movieid = #{movieId}
+    </delete>
 </mapper>

@@ -43,4 +43,10 @@ public class UserController {
         userService.addFMovieList(userId, ids);
         return userService.getFavouriteList(userId);
     }
+
+    @DeleteMapping("movieList/removeMovie")
+    public String removeFromMovieList(int userId, @RequestBody List<Integer> movieId) {
+        userService.removeFromMovieList(userId, movieId);
+        return movieId.size() + " movies has been removed from list.";
+    }
 }

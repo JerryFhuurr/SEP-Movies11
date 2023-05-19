@@ -50,4 +50,11 @@ public class UserServiceImpl implements UserService {
             userMapper.addFMovieList(userId, movieId);
         }
     }
+
+    @Override
+    public void removeFromMovieList(int userId, List<Integer> movieId) {
+        for (Integer id : movieId) {
+            userMapper.removeFromMovieList(userId, id);
+        }
+    }
 }

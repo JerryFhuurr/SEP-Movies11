@@ -14,4 +14,5 @@ public interface UserMapper {
     void updateAUser(User newUser);
     List<Movie> getFavouriteList(int userId);
     void addFMovieList(@Param("userId") int userId, @Param("movieId") Integer movieId);
+    void removeFromMovieList(@Param("userId") int userId, @Param("movieId") Integer movieId);
 }
