@@ -1,10 +1,13 @@
 package com.movie.movies11.controller;
 
+import com.movie.movies11.models.Movie;
 import com.movie.movies11.models.User;
 import com.movie.movies11.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @Slf4j
 @RestController
@@ -30,4 +33,14 @@ public class UserController {
         return userService.getAUser(newUser.getUserId(), newUser.getUsername());
     }
 
+    @GetMapping("movieList/getList")
+    public List<Movie> getFavouriteList(int userId) {
+        return userService.getFavouriteList(userId);
+    }
+
+    @PostMapping("movieList/addToMovie")
+    public List<Movie> addFMovieList(int userId, @RequestBody List<Integer> ids) {
+        userService.addFMovieList(userId, ids);
+        return userService.getFavouriteList(userId);
+    }
 }

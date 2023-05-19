@@ -13,6 +13,7 @@
         insert into "user" (username, password) VALUES (#{username}, #{password})
     </insert>
 
+    <!-- update user info except movie list -->
     <update id="updateAUser" parameterType="com.movie.movies11.models.User">
         update "user"
         <set>
@@ -22,4 +23,19 @@
         where userId = #{userId} or username = #{username}
     </update>
 
+    <!-- get the movie list by user -->
+    <select id="getFavouriteList" resultType="com.movie.movies11.models.Movie">
+        select m.id, m.title, m.year
+        from favourite_movie fm, movies m
+        where fm.userId = #{userId} and fm.movieId = m.id;
+    </select>
+
+    <!-- add movies into list -->
+    <insert id="addFMovieList" parameterType="com.movie.movies11.models.Movie">
+        insert into favourite_movie (userId, movieId) VALUES
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            #{userId},
+            #{movieId},
+        </trim>
+    </insert>
 </mapper>
