@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.movie.movies11.sqlMapper.CommentMapper">
+    <!-- get comments by movie -->
+    <resultMap id="commentMovie" type="com.movie.movies11.models.Comment">
+        <id property="cid" column="cid" />
+        <result property="commentContext" column="comment" />
+        <result property="rating" column="rating" />
+        <association property="movie" column="movieid" javaType="com.movie.movies11.models.Movie">
+            <id property="id" column="id" />
+            <result property="title" column="title" />
+            <result property="year" column="year" />
+        </association>
+        <association property="user" column="userid" javaType="com.movie.movies11.models.User">
+            <result property="username" column="username" />
+        </association>
+    </resultMap>
+    <select id="getCommentByMovie" resultMap="commentMovie" resultType="com.movie.movies11.models.Comment">
+        select m.id, m.title, m.year, u.userName, c.cid, c.comment, c.rating
+        from movies m, comment c, "user" u
+        where m.id = #{mId} and c.movieId = m.id and c.userId = u.userId;
+    </select>
+
+    <!-- get comments by user -->
+    <resultMap id="commentUser" type="com.movie.movies11.models.Comment">
+        <id property="cid" column="cid" />
+        <result property="commentContext" column="comment" />
+        <result property="rating" column="rating" />
+        <association property="movie" column="movieid" javaType="com.movie.movies11.models.Movie">
+            <id property="id" column="id" />
+            <result property="title" column="title" />
+            <result property="year" column="year" />
+        </association>
+        <association property="user" column="userid" javaType="com.movie.movies11.models.User">
+            <result property="username" column="username" />
+        </association>
+    </resultMap>
+    <select id="getCommentByUser" resultMap="commentUser" resultType="com.movie.movies11.models.Comment">
+        select m.id, m.title, m.year, u.userName, c.cid, c.comment, c.rating
+        from movies m, comment c, "user" u
+        where c.userId = #{userId} and c.movieId = m.id and c.userId = u.userId;
+    </select>
+
+    <!-- TODO 添加一个通过movie和user查询评论的语句 -->
+
+    <!-- add a comment from user -->
+    <insert id="addComment" parameterType="com.movie.movies11.models.Comment">
+        insert into comment (userId, comment, rating, movieId) VALUES
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            #{user.userId},
+            #{commentContext},
+            #{rating},
+            #{movie.id}
+        </trim>
+    </insert>
+</mapper>

@@ -10,9 +10,9 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Builder
 public class Comment {
-    private int cId;
+    private int cid;
     private String commentContext;
     private float rating;
-    private User userId;
-    private Movie movieId;
+    private User user;
+    private Movie movie;
 }
