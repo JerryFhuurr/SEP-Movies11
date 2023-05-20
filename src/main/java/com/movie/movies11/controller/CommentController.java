@@ -35,6 +35,17 @@ public class CommentController {
         return commentService.removeComment(cId);
     }
 
+    @DeleteMapping("remove/more")
+    public StringBuilder removeMoreComments(@RequestBody List<Integer> ids) {
+        StringBuilder r = new StringBuilder("Comment id:");
+        for (Integer id : ids) {
+            commentService.removeComment(id);
+            r.append(id.toString()).append(" ");
+        }
+        r.append("removed");
+        return r;
+    }
+
     @PutMapping("update/one")
     public String updateComment(@RequestBody Comment comment) {
         commentService.updateComment(comment);
