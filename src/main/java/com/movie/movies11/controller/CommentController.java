@@ -27,7 +27,17 @@ public class CommentController {
 
     @PostMapping("add/one")
     public String addComment(@RequestBody Comment comment) {
-        commentService.addComment(comment);
-        return "Comment add:" + comment.toString();
+        return commentService.addComment(comment);
+    }
+
+    @DeleteMapping("remove/one")
+    public String removeAComment(int cId) {
+        return commentService.removeComment(cId);
+    }
+
+    @PutMapping("update/one")
+    public String updateComment(@RequestBody Comment comment) {
+        commentService.updateComment(comment);
+        return commentService.getCommentByMovieUser(comment.getMovie().getId(), comment.getUser().getUserId()).get(0).toString();
     }
 }

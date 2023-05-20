@@ -9,5 +9,8 @@ import java.util.List;
 public interface CommentService {
     List<Comment> getCommentByMovie(int mId);
     List<Comment> getCommentByUser(int uId);
-    void addComment(Comment comment);
+    String addComment(Comment comment);
+    List<Comment> getCommentByMovieUser(int mId, int uId);
+    String removeComment(int cId);
+    Comment updateComment(Comment comment);
 }
