@@ -1,5 +1,7 @@
 package com.movie.movies11.service.serviceImpl;
 
+import com.movie.movies11.exception.DbExceptionClass;
+import com.movie.movies11.exception.ErrorCode;
 import com.movie.movies11.models.Movie;
 import com.movie.movies11.models.User;
 import com.movie.movies11.service.UserService;
@@ -9,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @Service("userService")
 public class UserServiceImpl implements UserService {
@@ -17,22 +20,40 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User getAUser(int userId, String username) {
-        return userMapper.getAUser(userId, username);
+        try {
+            return userMapper.getAUser(userId, username);
+        } catch (Exception e) {
+            String msg = "User is not existed";
+            throw new DbExceptionClass(ErrorCode.User.USER_NOT_EXISTED, msg);
+        }
     }
 
     @Override
-    public String addAUser(User newUser) {
+    public List<String> getAllUsername() {
+        return userMapper.getAllUsername();
+    }
 
-        userMapper.addAUser(newUser);
-        return newUser.toString();
+    @Override
+    public void addAUser(User newUser) {
+        if (usernameAlreadyExisted(newUser.getUsername())) {
+            String errorMsg = "Username is already existed";
+            throw new DbExceptionClass(ErrorCode.User.USER_USERNAME_ERROR, errorMsg);
+        } else {
+            userMapper.addAUser(newUser);
+        }
     }
 
     @Override
     public void updateAUser(User newUser) {
         User user = userMapper.getAUser(newUser.getUserId(), null);
-        user.setUsername(newUser.getUsername());
-        user.setPassword(newUser.getPassword());
-        userMapper.updateAUser(user);
+        if (usernameAlreadyExisted(newUser.getUsername()) && !Objects.equals(newUser.getUsername(), user.getUsername())) {
+            String errorMsg = "Username is already existed";
+            throw new DbExceptionClass(ErrorCode.User.USER_USERNAME_ERROR, errorMsg);
+        } else {
+            user.setUsername(newUser.getUsername());
+            user.setPassword(newUser.getPassword());
+            userMapper.updateAUser(user);
+        }
     }
 
     @Override
@@ -58,5 +79,10 @@ public class UserServiceImpl implements UserService {
         for (Integer id : movieId) {
             userMapper.removeFromMovieList(userId, id);
         }
+    }
+
+    public boolean usernameAlreadyExisted(String username) {
+        List<String> usernames = getAllUsername();
+        return usernames.contains(username);
     }
 }

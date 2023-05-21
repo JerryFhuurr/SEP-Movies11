@@ -10,7 +10,8 @@ import java.util.List;
 @Service
 public interface UserService {
     User getAUser(int userId, String username);
-    String addAUser(User newUser);
+    List<String> getAllUsername();
+    void addAUser(User newUser);
     void updateAUser(User newUser);
     List<Movie> getFavouriteList(int userId);
     void addFMovieList(int userId, List<Integer> movieIds);

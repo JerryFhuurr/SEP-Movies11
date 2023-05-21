@@ -8,6 +8,18 @@
         where userId = #{userId} or username = #{username}
     </select>
 
+    <!-- get all users -->
+    <select id="getAllUsers" resultType="com.movie.movies11.models.User">
+        select *
+        from "user"
+    </select>
+
+    <!-- get all username -->
+    <select id="getAllUsername" resultType="string">
+        select u.username
+        from "user" u
+    </select>
+
     <!-- add a user -->
     <insert id="addAUser" parameterType="com.movie.movies11.models.User">
         insert into "user" (username, password) VALUES (#{username}, #{password})
