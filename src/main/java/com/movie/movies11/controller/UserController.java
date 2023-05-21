@@ -1,5 +1,7 @@
 package com.movie.movies11.controller;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.movie.movies11.models.Movie;
 import com.movie.movies11.models.User;
 import com.movie.movies11.service.UserService;
@@ -36,8 +38,10 @@ public class UserController {
     }
 
     @GetMapping("movieList/getList")
-    public List<Movie> getFavouriteList(int userId) {
-        return userService.getFavouriteList(userId);
+    public Object getFavouriteList(@RequestParam int userId, @RequestParam int pageNum, @RequestParam int pageSize) {
+        PageHelper.startPage(pageNum, pageSize);
+        List<Movie> movies = userService.getFavouriteList(userId);
+        return new PageInfo<>(movies);
     }
 
     @PostMapping("movieList/addToMovie")

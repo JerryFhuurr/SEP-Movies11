@@ -70,7 +70,13 @@ public class UserServiceImpl implements UserService {
         }
         movieIds.removeAll(haveIds);
         for (Integer movieId : movieIds) {
-            userMapper.addFMovieList(userId, movieId);
+            try {
+                userMapper.addFMovieList(userId, movieId);
+            } catch (Exception e) {
+                removeFromMovieList(userId, movieIds);
+                String msg = "Movie error";
+                throw new DbExceptionClass(ErrorCode.User.USER_MOVIElIST_ADD_NOT_EXISTED, msg);
+            }
         }
     }
 

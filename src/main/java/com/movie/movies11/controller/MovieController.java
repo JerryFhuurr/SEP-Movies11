@@ -31,8 +31,10 @@ public class MovieController {
         return moviesService.getOneMovieById(id);
     }
 
-    @GetMapping("getByProperties")
-    List<Movie> getByProperties(@RequestBody Movie movie) {
-        return moviesService.getMovies(movie);
+    @GetMapping("getByIdTitle")
+    Object getByProperties(@RequestBody Movie movie, @RequestParam int pageNum, @RequestParam int pageSize) {
+        PageHelper.startPage(pageNum, pageSize);
+        List<Movie> moviesGet = moviesService.getMovies(movie);
+        return new PageInfo<>(moviesGet);
     }
 }

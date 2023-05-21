@@ -39,7 +39,7 @@
     <select id="getFavouriteList" resultType="com.movie.movies11.models.Movie">
         select m.id, m.title, m.year
         from favourite_movie fm, movies m
-        where fm.userId = #{userId} and fm.movieId = m.id;
+        where fm.userId = #{userId} and fm.movieId = m.id
     </select>
 
     <!-- add movies into list -->

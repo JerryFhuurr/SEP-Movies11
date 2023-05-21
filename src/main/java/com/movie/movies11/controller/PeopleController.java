@@ -1,15 +1,12 @@
 package com.movie.movies11.controller;
 
-import com.movie.movies11.models.Movie;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.movie.movies11.models.People;
-import com.movie.movies11.service.MoviesService;
 import com.movie.movies11.service.PeopleService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -21,22 +18,26 @@ public class PeopleController {
     PeopleService peopleService;
 
     @GetMapping("getAll")
-    public List<People> getAllPeople() {
-        return peopleService.getAllPeople();
+    public Object getAllPeople(@RequestParam int pageNum, @RequestParam int pageSize) {
+        PageHelper.startPage(pageNum, pageSize);
+        List<People> peopleList = peopleService.getAllPeople();
+        return new PageInfo<>(peopleList);
     }
 
     @GetMapping("getSome")
-    public List<People> getPeopleByIdOrName(@RequestBody People people) {
+    public Object getPeopleByIdOrName(@RequestBody People people) {
         return peopleService.getPeople(people);
     }
 
     @GetMapping("getDirector")
-    public People getDirector(String movieTitle) {
+    public People getDirector(@RequestParam String movieTitle) {
         return peopleService.getDirector(movieTitle);
     }
 
     @GetMapping("getActors")
-    public List<People> getActorsByMovie(String movieTitle) {
-        return peopleService.getActorsByMovie(movieTitle);
+    public Object getActorsByMovie(@RequestParam String movieTitle, @RequestParam int pageNum, @RequestParam int pageSize) {
+        PageHelper.startPage(pageNum, pageSize);
+        List<People> peopleList = peopleService.getActorsByMovie(movieTitle);
+        return new PageInfo<>(peopleList);
     }
 }
