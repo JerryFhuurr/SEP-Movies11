@@ -2,8 +2,10 @@ package com.movie.movies11.controller;
 
 import com.movie.movies11.models.Comment;
 import com.movie.movies11.service.CommentService;
+import com.movie.movies11.service.validate.CommentValidate;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -26,7 +28,7 @@ public class CommentController {
     }
 
     @PostMapping("add/one")
-    public String addComment(@RequestBody Comment comment) {
+    public String addComment(@Validated(CommentValidate.class) @RequestBody Comment comment) {
         return commentService.addComment(comment);
     }
 
@@ -47,7 +49,7 @@ public class CommentController {
     }
 
     @PutMapping("update/one")
-    public String updateComment(@RequestBody Comment comment) {
+    public String updateComment(@Validated(CommentValidate.class) @RequestBody Comment comment) {
         commentService.updateComment(comment);
         return commentService.getCommentByMovieUser(comment.getMovie().getId(), comment.getUser().getUserId()).get(0).toString();
     }

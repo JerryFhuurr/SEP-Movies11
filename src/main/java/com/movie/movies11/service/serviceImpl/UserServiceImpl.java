@@ -24,6 +24,7 @@ public class UserServiceImpl implements UserService {
     public String addAUser(User newUser) {
 
         userMapper.addAUser(newUser);
+        return newUser.toString();
     }
 
     @Override
