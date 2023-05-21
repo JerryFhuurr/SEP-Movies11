@@ -1,13 +1,12 @@
 package com.movie.movies11.controller;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.movie.movies11.models.Movie;
 import com.movie.movies11.service.MoviesService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -19,8 +18,10 @@ public class MovieController {
     MoviesService moviesService;
 
     @GetMapping("getAll")
-    List<Movie> getALlMovies() {
-        return moviesService.getAllMovies();
+    Object getALlMovies(@RequestParam int pageNum, @RequestParam int pageSize) {
+        PageHelper.startPage(pageNum, pageSize);
+        List<Movie> movies = moviesService.getAllMovies();
+        return new PageInfo<>(movies);
     }
 
     @GetMapping("getOne")
