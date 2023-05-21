@@ -21,6 +21,8 @@ public class MovieController {
     Object getALlMovies(@RequestParam int pageNum, @RequestParam int pageSize) {
         PageHelper.startPage(pageNum, pageSize);
         List<Movie> movies = moviesService.getAllMovies();
+        // total page : 26190 (10 items in one page)
+        // total movie number : 261900
         return new PageInfo<>(movies);
     }
 
