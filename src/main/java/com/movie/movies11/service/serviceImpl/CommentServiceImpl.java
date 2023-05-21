@@ -1,5 +1,7 @@
 package com.movie.movies11.service.serviceImpl;
 
+import com.movie.movies11.exception.DbExceptionClass;
+import com.movie.movies11.exception.ErrorCode;
 import com.movie.movies11.models.Comment;
 import com.movie.movies11.models.Rating;
 import com.movie.movies11.service.CommentService;
@@ -38,12 +40,19 @@ public class CommentServiceImpl implements CommentService {
             }
         }
         if (count > 0) {
-            return "Error: Comment already have";
+            String msg = "Comment already existed";
+            throw new DbExceptionClass(ErrorCode.Comment.COMMENT_ALREADY_EXISTED, msg);
         } else {
-            Rating r = new Rating(comment.getRating(), 0, comment.getMovie());
-            ratingMapper.addARating(r);
-            commentMapper.addComment(comment);
-            return "Add comment:" + comment.toString();
+            if (comment.getRating() > 0 && comment.getRating() < 10) {
+                Rating r = new Rating(comment.getRating(), 0, comment.getMovie());
+                ratingMapper.addARating(r);
+                commentMapper.addComment(comment);
+                return "Add comment:" + comment.toString();
+            } else {
+                throw new DbExceptionClass(ErrorCode.Rating.RATING_NUMBER_OVER_RANGE,
+                        "Please enter valid rating");
+            }
+
         }
     }
 

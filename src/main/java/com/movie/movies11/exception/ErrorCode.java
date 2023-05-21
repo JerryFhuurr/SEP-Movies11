@@ -12,5 +12,7 @@ public class ErrorCode {
         public static final Integer USER_USERNAME_ERROR = 202;
     }
 
-
+    public static class Rating {
+        public static final Integer RATING_NUMBER_OVER_RANGE = 301;
+    }
 }
