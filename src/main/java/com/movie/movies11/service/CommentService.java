@@ -12,5 +12,5 @@ public interface CommentService {
     String addComment(Comment comment);
     List<Comment> getCommentByMovieUser(int mId, int uId);
     String removeComment(int cId);
-    Comment updateComment(Comment comment);
+    void updateComment(Comment comment);
 }

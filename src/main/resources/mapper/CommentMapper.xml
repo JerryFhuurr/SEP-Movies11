@@ -32,8 +32,13 @@
     <!-- get comment by movie and user -->
     <select id="getCommentByMovieUser" resultMap="commentMovieUser" resultType="com.movie.movies11.models.Comment">
         select m.id, m.title, u.userid, u.userName, c.cId, c.comment, c.rating
-        from movies m, comment c, "user" u
-        where c.userId = #{uId} and m.id = #{mId} and c.movieId = m.id and c.userId = u.userId
+        from movies m,
+             comment c,
+             "user" u
+        where c.userId = #{uId}
+          and m.id = #{mId}
+          and c.movieId = m.id
+          and c.userId = u.userId
     </select>
 
     <!-- add a comment from user -->

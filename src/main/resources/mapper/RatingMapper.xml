@@ -3,18 +3,20 @@
 <mapper namespace="com.movie.movies11.sqlMapper.RatingMapper">
     <!-- GET rating by movie id -->
     <resultMap id="movieInRating" type="com.movie.movies11.models.Rating">
-        <result property="ratings" column="rating" />
-        <result property="votes" column="votes" />
+        <result property="ratings" column="rating"/>
+        <result property="votes" column="votes"/>
         <association property="movie" column="movie_id" javaType="com.movie.movies11.models.Movie">
-            <id property="id" column="id" />
-            <result property="title" column="title" />
-            <result property="year" column="year" />
+            <id property="id" column="id"/>
+            <result property="title" column="title"/>
+            <result property="year" column="year"/>
         </association>
     </resultMap>
     <select id="getRating" resultMap="movieInRating" resultType="com.movie.movies11.models.Rating">
         select r.rating, r.votes, m.id, m.title, m.year
-        from movies m, ratings r
-        where r.movie_id = #{id} and r.movie_id = m.id
+        from movies m,
+             ratings r
+        where r.movie_id = #{id}
+          and r.movie_id = m.id
     </select>
 
     <!-- add a rating to a movie -->

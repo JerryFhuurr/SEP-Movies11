@@ -10,10 +10,16 @@ import java.util.List;
 @Mapper
 public interface UserMapper {
     User getAUser(int userId, String username);
+
     List<String> getAllUsername();
+
     void addAUser(User newUser);
+
     void updateAUser(User newUser);
+
     List<Movie> getFavouriteList(int userId);
+
     void addFMovieList(@Param("userId") int userId, @Param("movieId") Integer movieId);
+
     void removeFromMovieList(@Param("userId") int userId, @Param("movieId") Integer movieId);
 }

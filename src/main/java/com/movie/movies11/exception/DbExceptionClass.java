@@ -3,7 +3,7 @@ package com.movie.movies11.exception;
 import lombok.Getter;
 import lombok.Setter;
 
-public class DbExceptionClass extends RuntimeException{
+public class DbExceptionClass extends RuntimeException {
     public static final Integer DEFAULT_ERROR_CODE = 0;
     public static final String DEFAULT_ERROR_MSG = "Internal error";
 

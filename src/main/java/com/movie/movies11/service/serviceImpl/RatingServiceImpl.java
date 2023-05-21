@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 public class RatingServiceImpl implements RatingService {
     @Autowired
     RatingMapper ratingMapper;
+
     @Override
     public Rating getRating(int movieId) {
         return ratingMapper.getRating(movieId);

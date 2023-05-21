@@ -8,7 +8,8 @@
     </select>
 
     <!-- GET one -->
-    <select id="getOneMovieById" resultType="com.movie.movies11.models.Movie" parameterType="com.movie.movies11.models.Movie">
+    <select id="getOneMovieById" resultType="com.movie.movies11.models.Movie"
+            parameterType="com.movie.movies11.models.Movie">
         SELECT *
         FROM movies
         WHERE id = #{movieId}
@@ -18,6 +19,7 @@
     <select id="getMovies" resultType="com.movie.movies11.models.Movie">
         SELECT *
         FROM movies
-        WHERE id = #{id} OR title = #{title}
+        WHERE id = #{id}
+           OR title = #{title}
     </select>
 </mapper>

@@ -17,7 +17,9 @@
     <!-- GET director by movie id -->
     <select id="getDirector" resultType="com.movie.movies11.models.People">
         SELECT people.id, people.name, people.birth
-        FROM directors, people, movies
+        FROM directors,
+             people,
+             movies
         WHERE directors.person_id = people.id
           AND directors.movie_id = movies.id
           AND movies.title = #{movieName}

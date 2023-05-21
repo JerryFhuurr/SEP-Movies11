@@ -8,9 +8,14 @@ import java.util.List;
 @Mapper
 public interface CommentMapper {
     List<Comment> getCommentByMovie(int mId);
+
     List<Comment> getCommentByUser(int uId);
+
     void addComment(Comment comment);
+
     List<Comment> getCommentByMovieUser(int mId, int uId);
+
     void removeComment(int cId);
+
     void updateComment(Comment comment);
 }

@@ -8,7 +8,10 @@ import java.util.List;
 @Service
 public interface PeopleService {
     List<People> getAllPeople();
+
     List<People> getPeople(People people);
+
     People getDirector(String movieTitle);
+
     List<People> getActorsByMovie(String movieTitle);
 }

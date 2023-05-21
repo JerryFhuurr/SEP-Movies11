@@ -8,8 +8,11 @@ import java.util.List;
 @Mapper
 public interface PeopleMapper {
     List<People> getAllPeople();
+
     List<People> getPeople(People people);
+
     People getDirector(String movieTitle);
+
     List<People> getActorsByMovie(String movieTitle);
 
 }

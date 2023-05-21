@@ -35,7 +35,7 @@ public class CommentServiceImpl implements CommentService {
         List<Comment> commentFromUser = getCommentByMovieUser(comment.getMovie().getId(), comment.getUser().getUserId());
         for (Comment c : commentFromUser) {
             if (c.getUser().getUserId() == comment.getUser().getUserId()
-            && c.getMovie().getId() == comment.getMovie().getId()) {
+                    && c.getMovie().getId() == comment.getMovie().getId()) {
                 count++;
             }
         }
@@ -68,7 +68,7 @@ public class CommentServiceImpl implements CommentService {
     }
 
     @Override
-    public Comment updateComment(Comment comment) {
+    public void updateComment(Comment comment) {
         Comment c = commentMapper.getCommentByMovieUser(comment.getMovie().getId(), comment.getUser().getUserId()).get(0);
         c.setCommentContext(comment.getCommentContext());
         if (comment.getRating() != c.getRating()) {
@@ -78,6 +78,5 @@ public class CommentServiceImpl implements CommentService {
             ratingMapper.addARating(rating);
         }
         commentMapper.updateComment(c);
-        return c;
     }
 }

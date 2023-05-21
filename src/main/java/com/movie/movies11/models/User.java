@@ -20,6 +20,6 @@ public class User {
     private String username;
     @NotNull(message = "Password cannot be null")
     @NotBlank(message = "Password cannot be blank")
-    @Size(max= 15, min = 5, message = "Password length must between 5 and 15")
+    @Size(max = 15, min = 5, message = "Password length must between 5 and 15")
     private String password;
 }

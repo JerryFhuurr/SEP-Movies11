@@ -12,6 +12,7 @@ import java.util.List;
 public class MoviesServiceImpl implements MoviesService {
     @Autowired
     MovieMapper movieMapper;
+
     @Override
     public List<Movie> getAllMovies() {
         return movieMapper.getAllMovies();

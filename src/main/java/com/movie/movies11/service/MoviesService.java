@@ -8,6 +8,8 @@ import java.util.List;
 @Service
 public interface MoviesService {
     List<Movie> getAllMovies();
+
     Movie getOneMovieById(int id);
+
     List<Movie> getMovies(Movie movie);
 }

@@ -5,7 +5,8 @@
     <select id="getAUser" resultType="com.movie.movies11.models.User">
         select *
         from "user"
-        where userId = #{userId} or username = #{username}
+        where userId = #{userId}
+           or username = #{username}
     </select>
 
     <!-- get all users -->
@@ -22,7 +23,8 @@
 
     <!-- add a user -->
     <insert id="addAUser" parameterType="com.movie.movies11.models.User">
-        insert into "user" (username, password) VALUES (#{username}, #{password})
+        insert into "user" (username, password)
+        VALUES (#{username}, #{password})
     </insert>
 
     <!-- update user info except movie list -->
@@ -38,8 +40,10 @@
     <!-- get the movie list by user -->
     <select id="getFavouriteList" resultType="com.movie.movies11.models.Movie">
         select m.id, m.title, m.year
-        from favourite_movie fm, movies m
-        where fm.userId = #{userId} and fm.movieId = m.id
+        from favourite_movie fm,
+             movies m
+        where fm.userId = #{userId}
+          and fm.movieId = m.id
     </select>
 
     <!-- add movies into list -->
