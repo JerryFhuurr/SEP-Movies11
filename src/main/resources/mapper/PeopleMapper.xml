@@ -14,8 +14,8 @@
         WHERE id = #{id} OR name = #{name}
     </select>
 
-    <!-- GET director by movie id -->
-    <select id="getDirector" resultType="com.movie.movies11.models.People">
+    <!-- GET director by movie title -->
+    <select id="getDirectorByTitle" resultType="com.movie.movies11.models.People">
         SELECT people.id, people.name, people.birth
         FROM directors,
              people,
@@ -23,6 +23,17 @@
         WHERE directors.person_id = people.id
           AND directors.movie_id = movies.id
           AND movies.title = #{movieName}
+    </select>
+
+    <!-- GET director by movie id -->
+    <select id="getDirectorById" resultType="com.movie.movies11.models.People">
+        SELECT people.id, people.name, people.birth
+        FROM directors,
+        people,
+        movies
+        WHERE directors.person_id = people.id
+        AND directors.movie_id = movies.id
+        AND movies.id = #{movieId}
     </select>
 
     <!-- GET actor by movie -->

@@ -12,7 +12,9 @@ public interface PeopleMapper {
 
     List<People> getPeople(@Param("id") int id, @Param("name") String name);
 
-    People getDirector(String movieTitle);
+    People getDirectorByTitle(String movieTitle);
+
+    People getDirectorById(int movieId);
 
     List<People> getActorsByMovie(String movieTitle);
 

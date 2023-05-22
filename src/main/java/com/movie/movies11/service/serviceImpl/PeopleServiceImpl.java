@@ -24,8 +24,13 @@ public class PeopleServiceImpl implements PeopleService {
     }
 
     @Override
-    public People getDirector(String movieTitle) {
-        return peopleMapper.getDirector(movieTitle);
+    public People getDirectorByTitle(String movieTitle) {
+        return peopleMapper.getDirectorByTitle(movieTitle);
+    }
+
+    @Override
+    public People getDirectorById(int movieId) {
+        return peopleMapper.getDirectorById(movieId);
     }
 
     @Override

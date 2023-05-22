@@ -29,9 +29,14 @@ public class PeopleController {
         return peopleService.getPeople(id, name);
     }
 
-    @GetMapping("getDirector")
-    public People getDirector(@RequestParam String movieTitle) {
-        return peopleService.getDirector(movieTitle);
+    @GetMapping("getDirectorByTitle")
+    public People getDirectorByTitle(@RequestParam String movieTitle) {
+        return peopleService.getDirectorByTitle(movieTitle);
+    }
+
+    @GetMapping("getDirectorById")
+    public People getDirectorById(int movieId) {
+        return peopleService.getDirectorById(movieId);
     }
 
     @GetMapping("getActors")

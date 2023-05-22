@@ -11,7 +11,9 @@ public interface PeopleService {
 
     List<People> getPeople(int id, String name);
 
-    People getDirector(String movieTitle);
+    People getDirectorByTitle(String movieTitle);
+
+    People getDirectorById(int movieId);
 
     List<People> getActorsByMovie(String movieTitle);
 }
