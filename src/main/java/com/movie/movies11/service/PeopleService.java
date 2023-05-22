@@ -9,7 +9,7 @@ import java.util.List;
 public interface PeopleService {
     List<People> getAllPeople();
 
-    List<People> getPeople(People people);
+    List<People> getPeople(int id, String name);
 
     People getDirector(String movieTitle);
 

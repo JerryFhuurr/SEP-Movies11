@@ -11,5 +11,5 @@ public interface MoviesService {
 
     Movie getOneMovieById(int id);
 
-    List<Movie> getMovies(Movie movie);
+    List<Movie> getMovies(int id, String title);
 }

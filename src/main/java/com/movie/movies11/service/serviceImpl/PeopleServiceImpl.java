@@ -19,8 +19,8 @@ public class PeopleServiceImpl implements PeopleService {
     }
 
     @Override
-    public List<People> getPeople(People people) {
-        return peopleMapper.getPeople(people);
+    public List<People> getPeople(int id, String name) {
+        return peopleMapper.getPeople(id, name);
     }
 
     @Override

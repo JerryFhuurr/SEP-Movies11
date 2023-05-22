@@ -24,7 +24,7 @@ public class MoviesServiceImpl implements MoviesService {
     }
 
     @Override
-    public List<Movie> getMovies(Movie movie) {
-        return movieMapper.getMovies(movie);
+    public List<Movie> getMovies(int id, String title) {
+        return movieMapper.getMovies(id, title);
     }
 }

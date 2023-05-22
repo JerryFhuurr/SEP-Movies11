@@ -2,6 +2,7 @@ package com.movie.movies11.sqlMapper;
 
 import com.movie.movies11.models.Movie;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -11,5 +12,5 @@ public interface MovieMapper {
 
     Movie getOneMovieById(int id);
 
-    List<Movie> getMovies(Movie movie);
+    List<Movie> getMovies(@Param("id") int id, @Param("title") String title);
 }

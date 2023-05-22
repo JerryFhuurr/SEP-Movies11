@@ -25,8 +25,8 @@ public class PeopleController {
     }
 
     @GetMapping("getSome")
-    public Object getPeopleByIdOrName(@RequestBody People people) {
-        return peopleService.getPeople(people);
+    public Object getPeopleByIdOrName(int id, String name) {
+        return peopleService.getPeople(id, name);
     }
 
     @GetMapping("getDirector")
