@@ -21,8 +21,8 @@ public class UserController {
     UserService userService;
 
     @GetMapping("getUser")
-    public User getAUser(@Validated(UserValidate.class) @RequestBody User user) {
-        return userService.getAUser(user.getUserId(), user.getUsername());
+    public User getAUser(int id, String username) {
+        return userService.getAUser(id, username);
     }
 
     @PostMapping("add/User")
