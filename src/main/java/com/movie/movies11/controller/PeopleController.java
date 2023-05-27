@@ -35,7 +35,7 @@ public class PeopleController {
     }
 
     @GetMapping("getDirectorById")
-    public People getDirectorById(int movieId) {
+    public People getDirectorById(@RequestParam int movieId) {
         return peopleService.getDirectorById(movieId);
     }
 
