@@ -10,6 +10,7 @@ import com.movie.movies11.sqlMapper.RatingMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 @Service("commentService")
@@ -46,6 +47,8 @@ public class CommentServiceImpl implements CommentService {
             if (comment.getRating() > 0 && comment.getRating() < 10) {
                 Rating r = new Rating(comment.getRating(), 0, comment.getMovie());
                 ratingMapper.addARating(r);
+                Timestamp current = new Timestamp(System.currentTimeMillis());
+                comment.setDate(current);
                 commentMapper.addComment(comment);
                 return "Add comment:" + comment.toString();
             } else {
@@ -77,6 +80,8 @@ public class CommentServiceImpl implements CommentService {
             ratingMapper.removeARating(rating);
             ratingMapper.addARating(rating);
         }
+        Timestamp current = new Timestamp(System.currentTimeMillis());
+        c.setDate(current);
         commentMapper.updateComment(c);
     }
 }

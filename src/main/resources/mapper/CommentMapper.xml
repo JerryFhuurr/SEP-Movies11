@@ -6,6 +6,7 @@
         <id property="cid" column="cid" />
         <result property="commentContext" column="comment" />
         <result property="rating" column="rating" />
+        <result property="date" column="date" />
         <association property="movie" column="movieid" javaType="com.movie.movies11.models.Movie">
             <id property="id" column="id" />
             <result property="title" column="title" />
@@ -17,21 +18,21 @@
         </association>
     </resultMap>
     <select id="getCommentByMovie" resultMap="commentMovieUser" resultType="com.movie.movies11.models.Comment">
-        select m.id, m.title, m.year, u.userName, c.cid, c.comment, c.rating
+        select m.id, m.title, m.year, u.userName, c.cid, c.comment, c.rating, c.date
         from movies m, comment c, "user" u
         where m.id = #{mId} and c.movieId = m.id and c.userId = u.userId;
     </select>
 
     <!-- get comments by user -->
     <select id="getCommentByUser" resultMap="commentMovieUser" resultType="com.movie.movies11.models.Comment">
-        select m.id, m.title, m.year, u.userName, c.cid, c.comment, c.rating
+        select m.id, m.title, m.year, u.userName, c.cid, c.comment, c.rating, c.date
         from movies m, comment c, "user" u
         where c.userId = #{userId} and c.movieId = m.id and c.userId = u.userId;
     </select>
 
     <!-- get comment by movie and user -->
     <select id="getCommentByMovieUser" resultMap="commentMovieUser" resultType="com.movie.movies11.models.Comment">
-        select m.id, m.title, u.userid, u.userName, c.cId, c.comment, c.rating
+        select m.id, m.title, u.userid, u.userName, c.cId, c.comment, c.rating, c.date
         from movies m,
              comment c,
              "user" u
@@ -43,10 +44,11 @@
 
     <!-- add a comment from user -->
     <insert id="addComment" parameterType="com.movie.movies11.models.Comment">
-        insert into comment (userId, comment, rating, movieId) VALUES
+        insert into comment (userId, comment, date, rating, movieId) VALUES
         <trim prefix="(" suffix=")" suffixOverrides=",">
             #{user.userId},
             #{commentContext},
+            #{date},
             #{rating},
             #{movie.id}
         </trim>
@@ -60,7 +62,8 @@
         UPDATE public.comment
             <set>
                 comment = #{commentContext},
-                rating = #{rating}
+                rating = #{rating},
+                date = #{date}
             </set>
         WHERE cid = #{cid}
     </update>

@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import java.sql.Timestamp;
 
 @Data
 @NoArgsConstructor
@@ -16,6 +17,7 @@ public class Comment {
     private int cid;
     private String commentContext;
     private float rating;
+    private Timestamp date;
     @NotNull(message = "User info cannot be null in comment")
     @NotBlank(message = "User info cannot be null in comment")
     private User user;
