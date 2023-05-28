@@ -12,6 +12,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 @SpringBootTest
@@ -42,7 +43,7 @@ class Movies11ApplicationTests {
 		List<Comment> comments = commentService.getCommentByMovieUser(64465, 2);
 		User user = userMapper.getAUser(2, null);
 		Movie movie = movieMapper.getOneMovieById(64465);
-		Comment comment = new Comment(6, "test", 5.1f, user, movie);
+		Comment comment = new Comment(6, "test", 5.1f, new Timestamp(System.currentTimeMillis()), user, movie);
 		for (Comment c :
 				comments) {
 			System.out.println(c.getUser().getUserId() + "," + comment.getUser().getUserId());
