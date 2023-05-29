@@ -13,8 +13,8 @@ public class Movie {
     private int id;
     private String title;
     private int year;
-    private String imagePath;
-    private String language;
-    private String genre;
-    private String overview;
+    //private String imagePath;
+    //private String language;
+    //private String genre;
+    //private String overview;
 }
