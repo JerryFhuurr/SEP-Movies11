@@ -71,4 +71,14 @@ public class MoviesServiceImpl implements MoviesService {
         }
     }
 
+    @Override public String getGenres(int id)
+    {
+        try {
+            TMDbAPI tmDbAPI = new TMDbAPI();
+            return tmDbAPI.getGenres(id);
+        } catch (Exception e) {
+            return e.getMessage();
+        }
+    }
+
 }

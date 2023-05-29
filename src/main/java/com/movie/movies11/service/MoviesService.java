@@ -21,4 +21,6 @@ public interface MoviesService {
     String getLanguage(int id);
 
     String getCountry(int id);
+
+    String getGenres(int id);
 }
