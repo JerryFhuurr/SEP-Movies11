@@ -6,6 +6,7 @@ import com.movie.movies11.models.Movie;
 import com.movie.movies11.service.MoviesService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.configurationprocessor.json.JSONException;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -38,4 +39,11 @@ public class MovieController {
         List<Movie> moviesGet = moviesService.getMovies(id, title);
         return new PageInfo<>(moviesGet);
     }
+
+    @GetMapping("getImage")
+    Object getImage(int id) throws JSONException
+    {
+        return moviesService.getImage(id);
+    }
+
 }
