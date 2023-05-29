@@ -22,4 +22,15 @@
         WHERE id = #{id}
            OR title = #{title}
     </select>
+
+    <update id="addExtraProperties" parameterType="com.movie.movies11.models.Movie">
+        UPDATE movies
+        <set>
+            image_path = #{imagePath},
+            language = #{language},
+            genre = #{genre},
+            overview = #{overview}
+        </set>
+        WHERE id = #{id}
+    </update>
 </mapper>

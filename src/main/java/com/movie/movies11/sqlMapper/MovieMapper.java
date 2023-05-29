@@ -13,4 +13,10 @@ public interface MovieMapper {
     Movie getOneMovieById(int id);
 
     List<Movie> getMovies(@Param("id") int id, @Param("title") String title);
+
+    void addExtraProperties(@Param("id") int id,
+                            @Param("imagePath") String imagePath,
+                            @Param("language") String language,
+                            @Param("genre") String genre,
+                            @Param("overview") String overview);
 }

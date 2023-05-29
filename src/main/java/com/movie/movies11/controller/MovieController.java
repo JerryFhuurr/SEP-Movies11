@@ -40,32 +40,32 @@ public class MovieController {
     }
 
     @GetMapping("getImage")
-    String getImage(int id)
-    {
+    String getImage(int id) {
         return moviesService.getImage(id);
     }
 
     @GetMapping("getOverview")
-    String getOverview(int id)
-    {
+    String getOverview(int id) {
         return moviesService.getOverview(id);
     }
 
     @GetMapping("getLanguage")
-    String getLanguage(int id)
-    {
+    String getLanguage(int id) {
         return moviesService.getLanguage(id);
     }
 
     @GetMapping("getCountry")
-    String getCountry(int id)
-    {
+    String getCountry(int id) {
         return moviesService.getCountry(id);
     }
 
     @GetMapping("getGenres")
-    String getGenres(int id)
-    {
+    String getGenres(int id) {
         return moviesService.getGenres(id);
+    }
+
+    @PostMapping("add/test")
+    public void addProperties() {
+        moviesService.addProperties();
     }
 }

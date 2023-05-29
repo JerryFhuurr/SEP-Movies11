@@ -1,6 +1,7 @@
 package com.movie.movies11.service;
 
 import com.movie.movies11.models.Movie;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.boot.configurationprocessor.json.JSONException;
 import org.springframework.stereotype.Service;
 
@@ -23,4 +24,6 @@ public interface MoviesService {
     String getCountry(int id);
 
     String getGenres(int id);
+
+    void addProperties();
 }
