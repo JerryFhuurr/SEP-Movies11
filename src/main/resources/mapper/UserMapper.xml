@@ -9,6 +9,12 @@
            or username = #{username}
     </select>
 
+    <select id="getUserByName" resultType="com.movie.movies11.models.User">
+        select *
+        from "user"
+        where username = #{username}
+    </select>
+
     <!-- get all users -->
     <select id="getAllUsers" resultType="com.movie.movies11.models.User">
         select *

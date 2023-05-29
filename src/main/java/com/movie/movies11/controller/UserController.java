@@ -26,6 +26,11 @@ public class UserController {
         return userService.getAUser(id, username);
     }
 
+    @GetMapping("login")
+    public String userLogin(String username, String password) {
+        return userService.userLogin(username, password);
+    }
+
     @PostMapping("add/User")
     public User addAUser(@Validated(UserValidate.class) @RequestBody User newUser) {
         userService.addAUser(newUser);
