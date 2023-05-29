@@ -62,4 +62,10 @@ public class MovieController {
     {
         return moviesService.getCountry(id);
     }
+
+    @GetMapping("getGenres")
+    String getGenres(int id)
+    {
+        return moviesService.getGenres(id);
+    }
 }
