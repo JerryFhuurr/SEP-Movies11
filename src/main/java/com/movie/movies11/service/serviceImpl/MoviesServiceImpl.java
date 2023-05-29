@@ -85,36 +85,4 @@ public class MoviesServiceImpl implements MoviesService {
         }
     }
 
-    @Override
-    public void addProperties() {
-        List<Movie> list = movieMapper.getAllMovies();
-        for (Movie m : list) {
-            String id = String.valueOf(m.getId());
-            String imagePath = getImage(id);
-            String language = getLanguage(id);
-            String country = getCountry(id);
-            String genre = getGenres(id);
-            String overview = getOverview(id);
-            if (imagePath.contains("not found")) {
-                imagePath = "N/A";
-            }
-            if (language.contains("not found")) {
-                language = "N/A";
-            }
-            if (imagePath.contains("not found")) {
-                imagePath = "N/A";
-            }
-            if (genre.contains("not found")) {
-                genre = "N/A";
-            }
-            if (overview.contains("not found")) {
-                overview = "N/A";
-            }
-            if (country.contains("not found")) {
-                country = "N/A";
-            }
-            movieMapper.addExtraProperties(m.getId(), imagePath, language, country, genre, overview);
-        }
-    }
-
 }

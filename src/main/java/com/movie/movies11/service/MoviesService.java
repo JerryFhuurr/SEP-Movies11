@@ -24,5 +24,4 @@ public interface MoviesService {
 
     String getGenres(String id);
 
-    void addProperties();
 }

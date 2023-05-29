@@ -22,6 +22,13 @@ public class MovieController {
     Object getALlMovies(@RequestParam int pageNum, @RequestParam int pageSize) {
         PageHelper.startPage(pageNum, pageSize);
         List<Movie> movies = moviesService.getAllMovies();
+        for (Movie m : movies) {
+            m.setImagePath(moviesService.getImage(String.valueOf(m.getId())));
+            m.setCountry(moviesService.getCountry(String.valueOf(m.getId())));
+            m.setGenre(moviesService.getGenres(String.valueOf(m.getId())));
+            m.setLanguage(moviesService.getLanguage(String.valueOf(m.getId())));
+            m.setOverview(moviesService.getOverview(String.valueOf(m.getId())));
+        }
         // total page : 26190 (10 items in one page)
         // total movie number : 261900
         return new PageInfo<>(movies);
@@ -29,48 +36,52 @@ public class MovieController {
 
     @GetMapping("getOne")
     Movie getOneMovieById(int id) {
-        return moviesService.getOneMovieById(id);
+        Movie m = moviesService.getOneMovieById(id);
+        m.setImagePath(moviesService.getImage(String.valueOf(m.getId())));
+        m.setCountry(moviesService.getCountry(String.valueOf(m.getId())));
+        m.setGenre(moviesService.getGenres(String.valueOf(m.getId())));
+        m.setLanguage(moviesService.getLanguage(String.valueOf(m.getId())));
+        m.setOverview(moviesService.getOverview(String.valueOf(m.getId())));
+        return m;
     }
 
     @GetMapping("getByIdTitle")
     Object getByProperties(int id, String title, @RequestParam int pageNum, @RequestParam int pageSize) {
         PageHelper.startPage(pageNum, pageSize);
         List<Movie> moviesGet = moviesService.getMovies(id, title);
+        for (Movie m : moviesGet) {
+            m.setImagePath(moviesService.getImage(String.valueOf(m.getId())));
+            m.setCountry(moviesService.getCountry(String.valueOf(m.getId())));
+            m.setGenre(moviesService.getGenres(String.valueOf(m.getId())));
+            m.setLanguage(moviesService.getLanguage(String.valueOf(m.getId())));
+            m.setOverview(moviesService.getOverview(String.valueOf(m.getId())));
+        }
         return new PageInfo<>(moviesGet);
     }
 
     @GetMapping("getImage")
-    String getImage(String id)
-    {
+    String getImage(String id) {
         return moviesService.getImage(id);
     }
 
     @GetMapping("getOverview")
-    String getOverview(String id)
-    {
+    String getOverview(String id) {
         return moviesService.getOverview(id);
     }
 
     @GetMapping("getLanguage")
-    String getLanguage(String id)
-    {
+    String getLanguage(String id) {
         return moviesService.getLanguage(id);
     }
 
     @GetMapping("getCountry")
-    String getCountry(String id)
-    {
+    String getCountry(String id) {
         return moviesService.getCountry(id);
     }
 
     @GetMapping("getGenres")
-    String getGenres(String id)
-    {
+    String getGenres(String id) {
         return moviesService.getGenres(id);
     }
 
-    @PostMapping("add/p")
-    void addP() {
-        moviesService.addProperties();
-    }
 }
