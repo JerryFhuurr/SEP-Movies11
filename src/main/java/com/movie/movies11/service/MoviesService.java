@@ -14,13 +14,13 @@ public interface MoviesService {
 
     List<Movie> getMovies(int id, String title);
 
-    String getImage(int id);
+    String getImage(String id);
 
-    String getOverview(int id);
+    String getOverview(String id);
 
-    String getLanguage(int id);
+    String getLanguage(String id);
 
-    String getCountry(int id);
+    String getCountry(String id);
 
-    String getGenres(int id);
+    String getGenres(String id);
 }

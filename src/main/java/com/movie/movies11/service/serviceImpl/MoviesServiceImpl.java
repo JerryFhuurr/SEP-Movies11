@@ -30,7 +30,7 @@ public class MoviesServiceImpl implements MoviesService {
     }
 
     @Override
-    public String getImage(int id)
+    public String getImage(String id)
     {
         try {
             TMDbAPI tmDbAPI = new TMDbAPI();
@@ -41,7 +41,7 @@ public class MoviesServiceImpl implements MoviesService {
     }
 
     @Override
-    public String getOverview(int id)
+    public String getOverview(String id)
     {
         try {
             TMDbAPI tmDbAPI = new TMDbAPI();
@@ -51,7 +51,7 @@ public class MoviesServiceImpl implements MoviesService {
         }
     }
 
-    @Override public String getLanguage(int id)
+    @Override public String getLanguage(String id)
     {
         try {
             TMDbAPI tmDbAPI = new TMDbAPI();
@@ -61,7 +61,7 @@ public class MoviesServiceImpl implements MoviesService {
         }
     }
 
-    @Override public String getCountry(int id)
+    @Override public String getCountry(String id)
     {
         try {
             TMDbAPI tmDbAPI = new TMDbAPI();
@@ -71,7 +71,7 @@ public class MoviesServiceImpl implements MoviesService {
         }
     }
 
-    @Override public String getGenres(int id)
+    @Override public String getGenres(String id)
     {
         try {
             TMDbAPI tmDbAPI = new TMDbAPI();

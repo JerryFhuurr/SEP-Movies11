@@ -40,31 +40,31 @@ public class MovieController {
     }
 
     @GetMapping("getImage")
-    String getImage(int id)
+    String getImage(String id)
     {
         return moviesService.getImage(id);
     }
 
     @GetMapping("getOverview")
-    String getOverview(int id)
+    String getOverview(String id)
     {
         return moviesService.getOverview(id);
     }
 
     @GetMapping("getLanguage")
-    String getLanguage(int id)
+    String getLanguage(String id)
     {
         return moviesService.getLanguage(id);
     }
 
     @GetMapping("getCountry")
-    String getCountry(int id)
+    String getCountry(String id)
     {
         return moviesService.getCountry(id);
     }
 
     @GetMapping("getGenres")
-    String getGenres(int id)
+    String getGenres(String id)
     {
         return moviesService.getGenres(id);
     }
