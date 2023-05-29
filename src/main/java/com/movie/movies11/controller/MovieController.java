@@ -45,4 +45,10 @@ public class MovieController {
         return moviesService.getImage(id);
     }
 
+    @GetMapping("getOverview")
+    Object getOverview(int id) throws JSONException
+    {
+        return moviesService.getOverview(id);
+    }
+
 }
