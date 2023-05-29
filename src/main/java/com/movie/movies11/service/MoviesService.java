@@ -15,4 +15,6 @@ public interface MoviesService {
     List<Movie> getMovies(int id, String title);
 
     String getImage(int id) throws JSONException;
+
+    String getOverview(int id) throws JSONException;
 }

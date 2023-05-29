@@ -36,4 +36,10 @@ public class MoviesServiceImpl implements MoviesService {
         return tmDbAPI.getPosterPath(id);
     }
 
+    @Override public String getOverview(int id) throws JSONException
+    {
+        TMDbAPI tmDbAPI = new TMDbAPI();
+        return tmDbAPI.getOverview(id);
+    }
+
 }
