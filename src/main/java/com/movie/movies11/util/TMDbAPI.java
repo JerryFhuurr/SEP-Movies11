@@ -1,8 +1,8 @@
 package com.movie.movies11.util;
 
-import org.springframework.boot.configurationprocessor.json.JSONException;
-import org.springframework.boot.configurationprocessor.json.JSONObject;
-import org.springframework.boot.configurationprocessor.json.JSONTokener;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.*;
 import java.net.HttpURLConnection;
