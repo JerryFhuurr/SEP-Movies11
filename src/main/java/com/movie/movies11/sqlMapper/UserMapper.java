@@ -11,6 +11,8 @@ import java.util.List;
 public interface UserMapper {
     User getAUser(int userId, String username);
 
+    User getUserByName(String username);
+
     List<String> getAllUsername();
 
     void addAUser(User newUser);

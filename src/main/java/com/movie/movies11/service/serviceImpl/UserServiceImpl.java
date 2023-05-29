@@ -6,6 +6,7 @@ import com.movie.movies11.models.Movie;
 import com.movie.movies11.models.User;
 import com.movie.movies11.service.UserService;
 import com.movie.movies11.sqlMapper.UserMapper;
+import com.movie.movies11.util.MD5Util;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -29,6 +30,28 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public String userLogin(String username, String password) {
+        User userGet;
+        try {
+            userGet = userMapper.getUserByName(username);
+            if (userGet == null) {
+                return "Cannot find user";
+            } else {
+                String passwordAfter = MD5Util.inputPassToFormPass(password);
+                if (username.equals(userGet.getUsername()) &&
+                        passwordAfter.equals(userGet.getPassword())) {
+                    return "Login success";
+                } else {
+                    return "Login fail";
+                }
+            }
+        } catch (Exception e) {
+            return e.getMessage();
+        }
+
+    }
+
+    @Override
     public List<String> getAllUsername() {
         return userMapper.getAllUsername();
     }
@@ -39,6 +62,7 @@ public class UserServiceImpl implements UserService {
             String errorMsg = "Username is already existed";
             throw new DbExceptionClass(ErrorCode.User.USER_USERNAME_ERROR, errorMsg);
         } else {
+            newUser.setPassword(MD5Util.inputPassToFormPass(newUser.getPassword()));
             userMapper.addAUser(newUser);
         }
     }
@@ -51,7 +75,7 @@ public class UserServiceImpl implements UserService {
             throw new DbExceptionClass(ErrorCode.User.USER_USERNAME_ERROR, errorMsg);
         } else {
             user.setUsername(newUser.getUsername());
-            user.setPassword(newUser.getPassword());
+            user.setPassword(MD5Util.inputPassToFormPass(newUser.getPassword()));
             userMapper.updateAUser(user);
         }
     }
