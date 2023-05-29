@@ -46,7 +46,7 @@ public class MovieController {
     }
 
     @GetMapping("getOverview")
-    Object getOverview(int id) throws JSONException
+    String getOverview(int id)
     {
         return moviesService.getOverview(id);
     }

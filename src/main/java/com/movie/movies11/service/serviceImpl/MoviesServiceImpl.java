@@ -29,8 +29,8 @@ public class MoviesServiceImpl implements MoviesService {
         return movieMapper.getMovies(id, title);
     }
 
-    @Override public String getImage(int id)
-    {
+    @Override
+    public String getImage(int id) {
         try {
             TMDbAPI tmDbAPI = new TMDbAPI();
             return tmDbAPI.getPosterPath(id);
@@ -40,10 +40,14 @@ public class MoviesServiceImpl implements MoviesService {
 
     }
 
-    @Override public String getOverview(int id) throws JSONException
-    {
-        TMDbAPI tmDbAPI = new TMDbAPI();
-        return tmDbAPI.getOverview(id);
+    @Override
+    public String getOverview(int id) {
+        try {
+            TMDbAPI tmDbAPI = new TMDbAPI();
+            return tmDbAPI.getOverview(id);
+        } catch (Exception e) {
+            return e.getMessage();
+        }
     }
 
 }
