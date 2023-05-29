@@ -28,6 +28,7 @@
         <set>
             image_path = #{imagePath},
             language = #{language},
+            country = #{country},
             genre = #{genre},
             overview = #{overview}
         </set>

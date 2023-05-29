@@ -1,5 +1,6 @@
 package com.movie.movies11.service.serviceImpl;
 
+import com.movie.movies11.util.IdHandler;
 import com.movie.movies11.util.TMDbAPI;
 import com.movie.movies11.models.Movie;
 import com.movie.movies11.service.MoviesService;
@@ -30,9 +31,9 @@ public class MoviesServiceImpl implements MoviesService {
     }
 
     @Override
-    public String getImage(String id)
-    {
+    public String getImage(String id) {
         try {
+            id = IdHandler.idExpandTo7(id);
             TMDbAPI tmDbAPI = new TMDbAPI();
             return tmDbAPI.getPosterPath(id);
         } catch (Exception e) {
@@ -41,9 +42,9 @@ public class MoviesServiceImpl implements MoviesService {
     }
 
     @Override
-    public String getOverview(String id)
-    {
+    public String getOverview(String id) {
         try {
+            id = IdHandler.idExpandTo7(id);
             TMDbAPI tmDbAPI = new TMDbAPI();
             return tmDbAPI.getOverview(id);
         } catch (Exception e) {
@@ -51,9 +52,10 @@ public class MoviesServiceImpl implements MoviesService {
         }
     }
 
-    @Override public String getLanguage(String id)
-    {
+    @Override
+    public String getLanguage(String id) {
         try {
+            id = IdHandler.idExpandTo7(id);
             TMDbAPI tmDbAPI = new TMDbAPI();
             return tmDbAPI.getLanguage(id);
         } catch (Exception e) {
@@ -61,9 +63,10 @@ public class MoviesServiceImpl implements MoviesService {
         }
     }
 
-    @Override public String getCountry(String id)
-    {
+    @Override
+    public String getCountry(String id) {
         try {
+            id = IdHandler.idExpandTo7(id);
             TMDbAPI tmDbAPI = new TMDbAPI();
             return tmDbAPI.getCountry(id);
         } catch (Exception e) {
@@ -71,41 +74,47 @@ public class MoviesServiceImpl implements MoviesService {
         }
     }
 
-    @Override public String getGenres(String id)
-    {
+    @Override
+    public String getGenres(String id) {
         try {
+            id = IdHandler.idExpandTo7(id);
             TMDbAPI tmDbAPI = new TMDbAPI();
             return tmDbAPI.getGenres(id);
         } catch (Exception e) {
             return e.getMessage();
         }
     }
-//
-//    @Override
-//    public void addProperties() {
-//        List<Movie> list = movieMapper.getAllMovies();
-//        for (Movie m: list) {
-//            String imagePath = getImage(m.getId());
-//            String language = getLanguage(m.getId());
-//            String genre = getGenres(m.getId());
-//            String overview = getOverview(m.getId());
-//            if (imagePath.contains("not found")) {
-//                imagePath = "N/A";
-//            }
-//            if (language.contains("not found")) {
-//                language = "N/A";
-//            }
-//            if (imagePath.contains("not found")) {
-//                imagePath = "N/A";
-//            }
-//            if (genre.contains("not found")) {
-//                genre = "N/A";
-//            }
-//            if (overview.contains("not found")) {
-//                overview = "N/A";
-//            }
-//            movieMapper.addExtraProperties(m.getId(), imagePath, language, genre, overview);
-//        }
-//    }
+
+    @Override
+    public void addProperties() {
+        List<Movie> list = movieMapper.getAllMovies();
+        for (Movie m : list) {
+            String id = String.valueOf(m.getId());
+            String imagePath = getImage(id);
+            String language = getLanguage(id);
+            String country = getCountry(id);
+            String genre = getGenres(id);
+            String overview = getOverview(id);
+            if (imagePath.contains("not found")) {
+                imagePath = "N/A";
+            }
+            if (language.contains("not found")) {
+                language = "N/A";
+            }
+            if (imagePath.contains("not found")) {
+                imagePath = "N/A";
+            }
+            if (genre.contains("not found")) {
+                genre = "N/A";
+            }
+            if (overview.contains("not found")) {
+                overview = "N/A";
+            }
+            if (country.contains("not found")) {
+                country = "N/A";
+            }
+            movieMapper.addExtraProperties(m.getId(), imagePath, language, country, genre, overview);
+        }
+    }
 
 }

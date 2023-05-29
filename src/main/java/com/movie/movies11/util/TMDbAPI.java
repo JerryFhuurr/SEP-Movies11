@@ -1,6 +1,7 @@
 package com.movie.movies11.util;
 
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -199,7 +200,7 @@ public class TMDbAPI {
         throw new RuntimeException(e);
       }
 
-      String finial = json.get("production_countries").toString();
+      String finial = json.getJSONArray("production_countries").getJSONObject(0).get("name").toString();
       System.out.println(finial);
       return finial;
     }
@@ -282,9 +283,15 @@ public class TMDbAPI {
         throw new RuntimeException(e);
       }
 
-      String finial = json.get("genres").toString();
-      System.out.println(finial);
-      return finial;
+      JSONArray jsonArray = json.getJSONArray("genres");
+      StringBuilder finialR = new StringBuilder();
+      for (int i = 0; i < jsonArray.length(); i++) {
+        finialR.append(jsonArray.getJSONObject(i).get("name"));
+        finialR.append(",");
+      }
+      finialR.deleteCharAt(finialR.length() - 1);
+      System.out.println(finialR);
+      return finialR.toString();
     }
     catch (ProtocolException e)
     {

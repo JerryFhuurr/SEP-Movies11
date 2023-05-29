@@ -23,4 +23,6 @@ public interface MoviesService {
     String getCountry(String id);
 
     String getGenres(String id);
+
+    void addProperties();
 }

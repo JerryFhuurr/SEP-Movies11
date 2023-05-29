@@ -68,4 +68,9 @@ public class MovieController {
     {
         return moviesService.getGenres(id);
     }
+
+    @PostMapping("add/p")
+    void addP() {
+        moviesService.addProperties();
+    }
 }
