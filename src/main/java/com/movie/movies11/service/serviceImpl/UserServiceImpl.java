@@ -4,6 +4,7 @@ import com.movie.movies11.exception.DbExceptionClass;
 import com.movie.movies11.exception.ErrorCode;
 import com.movie.movies11.models.Movie;
 import com.movie.movies11.models.User;
+import com.movie.movies11.service.MoviesService;
 import com.movie.movies11.service.UserService;
 import com.movie.movies11.sqlMapper.UserMapper;
 import com.movie.movies11.util.MD5Util;
@@ -18,6 +19,8 @@ import java.util.Objects;
 public class UserServiceImpl implements UserService {
     @Autowired
     UserMapper userMapper;
+    @Autowired
+    MoviesService moviesService;
 
     @Override
     public User getAUser(int userId, String username) {
@@ -82,7 +85,15 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public List<Movie> getFavouriteList(int userId) {
-        return userMapper.getFavouriteList(userId);
+        List<Movie> movies = userMapper.getFavouriteList(userId);
+        for (Movie m : movies) {
+            m.setImagePath(moviesService.getImage(String.valueOf(m.getId())));
+            m.setCountry(moviesService.getCountry(String.valueOf(m.getId())));
+            m.setGenre(moviesService.getGenres(String.valueOf(m.getId())));
+            m.setLanguage(moviesService.getLanguage(String.valueOf(m.getId())));
+            m.setOverview(moviesService.getOverview(String.valueOf(m.getId())));
+        }
+        return movies;
     }
 
     @Override
