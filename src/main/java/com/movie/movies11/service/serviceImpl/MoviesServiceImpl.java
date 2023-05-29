@@ -30,21 +30,42 @@ public class MoviesServiceImpl implements MoviesService {
     }
 
     @Override
-    public String getImage(int id) {
+    public String getImage(int id)
+    {
         try {
             TMDbAPI tmDbAPI = new TMDbAPI();
             return tmDbAPI.getPosterPath(id);
         } catch (Exception e) {
             return e.getMessage();
         }
-
     }
 
     @Override
-    public String getOverview(int id) {
+    public String getOverview(int id)
+    {
         try {
             TMDbAPI tmDbAPI = new TMDbAPI();
             return tmDbAPI.getOverview(id);
+        } catch (Exception e) {
+            return e.getMessage();
+        }
+    }
+
+    @Override public String getLanguage(int id)
+    {
+        try {
+            TMDbAPI tmDbAPI = new TMDbAPI();
+            return tmDbAPI.getLanguage(id);
+        } catch (Exception e) {
+            return e.getMessage();
+        }
+    }
+
+    @Override public String getCountry(int id)
+    {
+        try {
+            TMDbAPI tmDbAPI = new TMDbAPI();
+            return tmDbAPI.getCountry(id);
         } catch (Exception e) {
             return e.getMessage();
         }

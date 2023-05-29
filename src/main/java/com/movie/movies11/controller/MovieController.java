@@ -51,4 +51,15 @@ public class MovieController {
         return moviesService.getOverview(id);
     }
 
+    @GetMapping("getLanguage")
+    String getLanguage(int id)
+    {
+        return moviesService.getLanguage(id);
+    }
+
+    @GetMapping("getCountry")
+    String getCountry(int id)
+    {
+        return moviesService.getCountry(id);
+    }
 }

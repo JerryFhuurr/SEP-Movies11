@@ -17,4 +17,8 @@ public interface MoviesService {
     String getImage(int id);
 
     String getOverview(int id);
+
+    String getLanguage(int id);
+
+    String getCountry(int id);
 }
