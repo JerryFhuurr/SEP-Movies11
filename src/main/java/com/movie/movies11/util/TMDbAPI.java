@@ -1,4 +1,4 @@
-package com.movie.movies11;
+package com.movie.movies11.util;
 
 import org.springframework.boot.configurationprocessor.json.JSONException;
 import org.springframework.boot.configurationprocessor.json.JSONObject;
