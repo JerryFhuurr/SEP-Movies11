@@ -8,6 +8,7 @@ import com.movie.movies11.sqlMapper.CommentMapper;
 import com.movie.movies11.sqlMapper.MovieMapper;
 import com.movie.movies11.sqlMapper.RatingMapper;
 import com.movie.movies11.sqlMapper.UserMapper;
+import com.movie.movies11.util.IdHandler;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -52,6 +53,16 @@ class Movies11ApplicationTests {
 			System.out.println(c.getUser().getUserId() == comment.getUser().getUserId());
 			System.out.println(c.getMovie().getId() == comment.getMovie().getId());
 		}
+	}
+
+	@Test
+	void TestLengthId() {
+		String id = "35547";
+		String id2 = "699987";
+		String id3 = "5547892";
+		System.out.println(IdHandler.idExpandTo7(id));
+		System.out.println(IdHandler.idExpandTo7(id2));
+		System.out.println(IdHandler.idExpandTo7(id3));
 	}
 
 }
