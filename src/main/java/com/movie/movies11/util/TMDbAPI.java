@@ -12,15 +12,15 @@ import java.net.ProtocolException;
 import java.net.URL;
 import java.util.ArrayList;
 
-public class TMDbAPI {
-
+public class TMDbAPI
+{
   public String getPosterPath(String movieId) throws JSONException
   {
     JSONObject json = new JSONObject();
     String apiKey = "a1d579240045bb45c21c03bdc18a0f57";
     String image = new String();
-    String jsonString = "";
-    try {
+    try
+    {
       String apiUrl = "https://api.themoviedb.org/3/find/tt" +
           movieId +
           "?api_key=" + apiKey +
@@ -37,7 +37,8 @@ public class TMDbAPI {
       BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
       StringBuilder response = new StringBuilder();
       String line;
-      while ((line = reader.readLine()) != null) {
+      while ((line = reader.readLine()) != null)
+      {
         response.append(line);
       }
       reader.close();
@@ -45,7 +46,9 @@ public class TMDbAPI {
       // Parse JSON response
       json = new JSONObject(response.toString());
       image = json.getJSONArray( "movie_results").getJSONObject(0).get("poster_path").toString();
-    } catch (IOException e) {
+    }
+    catch (IOException e)
+    {
       e.printStackTrace();
     }
 
@@ -59,8 +62,8 @@ public class TMDbAPI {
     JSONObject json = new JSONObject();
     String apiKey = "a1d579240045bb45c21c03bdc18a0f57";
     String overview = new String();
-    String jsonString = "";
-    try {
+    try
+    {
       String apiUrl = "https://api.themoviedb.org/3/find/tt" +
           movieId +
           "?api_key=" + apiKey +
@@ -85,7 +88,9 @@ public class TMDbAPI {
       // Parse JSON response
       json = new JSONObject(response.toString());
       overview = json.getJSONArray( "movie_results").getJSONObject(0).get("overview").toString();
-    } catch (IOException e) {
+    }
+    catch (IOException e)
+    {
       e.printStackTrace();
     }
 
@@ -98,8 +103,8 @@ public class TMDbAPI {
     JSONObject json = new JSONObject();
     String apiKey = "a1d579240045bb45c21c03bdc18a0f57";
     String lan = new String();
-    String jsonString = "";
-    try {
+    try
+    {
       String apiUrl = "https://api.themoviedb.org/3/find/tt" +
           movieId +
           "?api_key=" + apiKey +
@@ -116,7 +121,8 @@ public class TMDbAPI {
       BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
       StringBuilder response = new StringBuilder();
       String line;
-      while ((line = reader.readLine()) != null) {
+      while ((line = reader.readLine()) != null)
+      {
         response.append(line);
       }
       reader.close();
@@ -124,10 +130,11 @@ public class TMDbAPI {
       // Parse JSON response
       json = new JSONObject(response.toString());
       lan = json.getJSONArray( "movie_results").getJSONObject(0).get("original_language").toString();
-    } catch (IOException e) {
+    }
+    catch (IOException e)
+    {
       e.printStackTrace();
     }
-
     System.out.println(lan);
     return lan;
   }
@@ -138,7 +145,6 @@ public class TMDbAPI {
     JSONObject json = new JSONObject();
     String apiKey = "a1d579240045bb45c21c03bdc18a0f57";
     String tmdbid = new String();
-    String jsonString = "";
     try
     {
       String apiUrl =
@@ -221,7 +227,6 @@ public class TMDbAPI {
     JSONObject json = new JSONObject();
     String apiKey = "a1d579240045bb45c21c03bdc18a0f57";
     String tmdbid = new String();
-    String jsonString = "";
     try
     {
       String apiUrl =
@@ -272,7 +277,6 @@ public class TMDbAPI {
 
         // Parse JSON response
         json = new JSONObject(response.toString());
-        // TODO: Extract poster path from JSON and handle accordingly
 
       }
       catch (IOException e)
@@ -310,7 +314,6 @@ public class TMDbAPI {
     JSONObject json = new JSONObject();
     String apiKey = "a1d579240045bb45c21c03bdc18a0f57";
     String tmdbid = new String();
-    String jsonString = "";
     try
     {
       String apiUrl =
@@ -389,6 +392,53 @@ public class TMDbAPI {
     {
       throw new RuntimeException(e);
     }
+  }
+
+  public String getListByGenre(int genreId,int page)
+      throws JSONException, MalformedURLException
+  {
+    JSONObject json = new JSONObject();
+    String apiKey = "a1d579240045bb45c21c03bdc18a0f57";
+    try
+    {
+      String apiUrl =
+          "https://api.themoviedb.org/3/discover/movie?api_key=a1d579240045bb45c21c03bdc18a0f57&with_genres=" +
+              genreId + "&" + page;
+
+      // Create URL object and open connection
+      URL url = new URL(apiUrl);
+      HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+
+      // Set request method
+      connection.setRequestMethod("GET");
+
+      // Read response
+      BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+      StringBuilder response = new StringBuilder();
+      String line;
+      while ((line = reader.readLine()) != null)
+      {
+        response.append(line);
+      }
+      reader.close();
+
+      // Parse JSON response
+      json = new JSONObject(response.toString());
+      System.out.println(json);
+    }
+    catch (ProtocolException e)
+    {
+      throw new RuntimeException(e);
+    }
+    catch (MalformedURLException e)
+    {
+      throw new RuntimeException(e);
+    }
+    catch (IOException e)
+    {
+      throw new RuntimeException(e);
+    }
+    return json.toString();
   }
 }
 
