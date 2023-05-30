@@ -8,6 +8,7 @@ import com.movie.movies11.sqlMapper.MovieMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -114,6 +115,19 @@ public class MoviesServiceImpl implements MoviesService {
             return tmDbAPI.getGenresId(id);
         } catch (Exception e) {
             return null;
+        }
+    }
+
+    @Override public String getListByGenre(int genreId, int page)
+    {
+        try
+        {
+            TMDbAPI tmDbAPI = new TMDbAPI();
+            return tmDbAPI.getListByGenre(genreId,page);
+        }
+        catch (MalformedURLException e)
+        {
+            throw new RuntimeException(e);
         }
     }
 

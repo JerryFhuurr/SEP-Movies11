@@ -119,4 +119,8 @@ public class MovieController {
         return moviesService.getGenresId(id);
     }
 
+    @GetMapping("getListByGenre")
+    String getListByGenre(int id,int page) {
+        return moviesService.getListByGenre(id,page);
+    }
 }

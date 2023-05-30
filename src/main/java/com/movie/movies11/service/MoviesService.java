@@ -31,4 +31,5 @@ public interface MoviesService {
 
     ArrayList<Integer> getGenresId(String id);
 
+    String getListByGenre(int genreId,int page);
 }
