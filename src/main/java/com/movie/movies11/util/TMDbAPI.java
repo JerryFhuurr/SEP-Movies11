@@ -197,7 +197,6 @@ public class TMDbAPI
 
         // Parse JSON response
         json = new JSONObject(response.toString());
-        // TODO: Extract poster path from JSON and handle accordingly
 
       }
       catch (IOException e)
