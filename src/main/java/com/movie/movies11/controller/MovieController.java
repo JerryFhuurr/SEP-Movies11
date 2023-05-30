@@ -8,6 +8,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Slf4j
@@ -59,6 +60,19 @@ public class MovieController {
         return new PageInfo<>(moviesGet);
     }
 
+    @GetMapping("getByGenre")
+    List<Movie> getMoviesByGenre(String genre) {
+        List<Movie> movies = moviesService.getMoviesByGenre(genre);
+        for (Movie m : movies) {
+            m.setImagePath(moviesService.getImage(String.valueOf(m.getId())));
+            m.setCountry(moviesService.getCountry(String.valueOf(m.getId())));
+            m.setGenre(moviesService.getGenres(String.valueOf(m.getId())));
+            m.setLanguage(moviesService.getLanguage(String.valueOf(m.getId())));
+            m.setOverview(moviesService.getOverview(String.valueOf(m.getId())));
+        }
+        return movies;
+    }
+
     @GetMapping("getImage")
     String getImage(String id) {
         return moviesService.getImage(id);
@@ -82,6 +96,11 @@ public class MovieController {
     @GetMapping("getGenres")
     String getGenres(String id) {
         return moviesService.getGenres(id);
+    }
+
+    @GetMapping("getGenresId")
+    ArrayList<Integer> getGenresId(String id) {
+        return moviesService.getGenresId(id);
     }
 
 }

@@ -23,4 +23,8 @@
            OR title = #{title}
     </select>
 
+    <select id="getMoviesByLimit" resultType="com.movie.movies11.models.Movie">
+        SELECT *
+        FROM movies LIMIT #{number}
+    </select>
 </mapper>

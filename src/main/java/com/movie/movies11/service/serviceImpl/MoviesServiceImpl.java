@@ -8,6 +8,7 @@ import com.movie.movies11.sqlMapper.MovieMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service("moviesService")
@@ -18,6 +19,21 @@ public class MoviesServiceImpl implements MoviesService {
     @Override
     public List<Movie> getAllMovies() {
         return movieMapper.getAllMovies();
+    }
+
+    @Override
+    public List<Movie> getMoviesByGenre(String genre) {
+        List<Movie> movies = movieMapper.getMoviesByLimit(100);
+        for (Movie m : movies) {
+            m.setGenre(getGenres(String.valueOf(m.getId())));
+        }
+        List<Movie> results = new ArrayList<>();
+        for (Movie m : movies) {
+            if (m.getGenre().contains(genre)) {
+                results.add(m);
+            }
+        }
+        return results;
     }
 
     @Override
@@ -82,6 +98,17 @@ public class MoviesServiceImpl implements MoviesService {
             return tmDbAPI.getGenres(id);
         } catch (Exception e) {
             return e.getMessage();
+        }
+    }
+
+    @Override
+    public ArrayList<Integer> getGenresId(String id) {
+        try {
+            id = IdHandler.idExpandTo7(id);
+            TMDbAPI tmDbAPI = new TMDbAPI();
+            return tmDbAPI.getGenresId(id);
+        } catch (Exception e) {
+            return null;
         }
     }
 

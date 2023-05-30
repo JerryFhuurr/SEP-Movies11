@@ -10,6 +10,7 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.ProtocolException;
 import java.net.URL;
+import java.util.ArrayList;
 
 public class TMDbAPI {
 
@@ -292,6 +293,93 @@ public class TMDbAPI {
       finialR.deleteCharAt(finialR.length() - 1);
       System.out.println(finialR);
       return finialR.toString();
+    }
+    catch (ProtocolException e)
+    {
+      throw new RuntimeException(e);
+    }
+    catch (IOException e)
+    {
+      throw new RuntimeException(e);
+    }
+  }
+
+  public ArrayList<Integer> getGenresId(String movieId)
+          throws JSONException, MalformedURLException
+  {
+    JSONObject json = new JSONObject();
+    String apiKey = "a1d579240045bb45c21c03bdc18a0f57";
+    String tmdbid = new String();
+    String jsonString = "";
+    try
+    {
+      String apiUrl =
+              "https://api.themoviedb.org/3/find/tt" + movieId + "?api_key=" + apiKey + "&external_source=imdb_id";
+
+      // Create URL object and open connection
+      URL url = new URL(apiUrl);
+      HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+
+      // Set request method
+      connection.setRequestMethod("GET");
+
+      // Read response
+      BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+      StringBuilder response = new StringBuilder();
+      String line;
+      while ((line = reader.readLine()) != null)
+      {
+        response.append(line);
+      }
+      reader.close();
+
+      // Parse JSON response
+      json = new JSONObject(response.toString());
+      tmdbid = json.getJSONArray("movie_results").getJSONObject(0).get("id").toString();
+
+      try
+      {
+        apiUrl = "https://api.themoviedb.org/3/movie/" +
+                tmdbid +
+                "?api_key=" + apiKey;
+
+        // Create URL object and open connection
+        url = new URL(apiUrl);
+        connection = (HttpURLConnection) url.openConnection();
+
+        // Set request method
+        connection.setRequestMethod("GET");
+
+        // Read response
+        reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+        response = new StringBuilder();
+        while ((line = reader.readLine()) != null)
+        {
+          response.append(line);
+        }
+        reader.close();
+
+        // Parse JSON response
+        json = new JSONObject(response.toString());
+        // TODO: Extract poster path from JSON and handle accordingly
+
+      }
+      catch (IOException e)
+      {
+        e.printStackTrace();
+      }
+      catch (JSONException e)
+      {
+        throw new RuntimeException(e);
+      }
+
+      JSONArray jsonArray = json.getJSONArray("genres");
+      ArrayList<Integer> ids = new ArrayList<>();
+      for (int i = 0; i < jsonArray.length(); i++) {
+        ids.add(Integer.parseInt(jsonArray.getJSONObject(i).get("id").toString()));
+      }
+      System.out.println(ids);
+      return ids;
     }
     catch (ProtocolException e)
     {

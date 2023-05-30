@@ -4,11 +4,14 @@ import com.movie.movies11.models.Movie;
 import org.springframework.boot.configurationprocessor.json.JSONException;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
 public interface MoviesService {
     List<Movie> getAllMovies();
+
+    List<Movie> getMoviesByGenre(String genre);
 
     Movie getOneMovieById(int id);
 
@@ -23,5 +26,7 @@ public interface MoviesService {
     String getCountry(String id);
 
     String getGenres(String id);
+
+    ArrayList<Integer> getGenresId(String id);
 
 }
