@@ -121,4 +121,10 @@ public class MoviesServiceImpl implements MoviesService {
         }
     }
 
+    @Override public String convertTMDbtoIMDbId(String tmdbId)
+    {
+        TMDbAPI tmDbAPI = new TMDbAPI();
+        return tmDbAPI.convertTMDbtoIMDbId(tmdbId);
+    }
+
 }

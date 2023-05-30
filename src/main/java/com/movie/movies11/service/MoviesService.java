@@ -31,4 +31,6 @@ public interface MoviesService {
     String getGenres(String id);
 
     String getListByGenre(int genreId,int page);
+
+    String convertTMDbtoIMDbId(String id);
 }

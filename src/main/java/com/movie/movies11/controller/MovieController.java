@@ -16,15 +16,16 @@ import java.util.List;
 @CrossOrigin
 @RestController
 @RequestMapping("/movie/")
-public class MovieController {
-    @Autowired
-    MoviesService moviesService;
+public class MovieController
+{
+    @Autowired MoviesService moviesService;
 
-    @GetMapping("getAll")
-    Object getALlMovies(@RequestParam int pageNum, @RequestParam int pageSize) {
+    @GetMapping("getAll") Object getALlMovies(@RequestParam int pageNum, @RequestParam int pageSize)
+    {
         PageHelper.startPage(pageNum, pageSize);
         List<Movie> movies = moviesService.getAllMovies();
-        for (Movie m : movies) {
+        for (Movie m : movies)
+        {
             m.setImagePath(moviesService.getImage(String.valueOf(m.getId())));
             m.setCountry(moviesService.getCountry(String.valueOf(m.getId())));
             m.setGenre(moviesService.getGenres(String.valueOf(m.getId())));
@@ -36,8 +37,8 @@ public class MovieController {
         return new PageInfo<>(movies);
     }
 
-    @GetMapping("getOne")
-    Movie getOneMovieById(int id) {
+    @GetMapping("getOne") Movie getOneMovieById(int id)
+    {
         Movie m = moviesService.getOneMovieById(id);
         m.setImagePath(moviesService.getImage(String.valueOf(m.getId())));
         m.setCountry(moviesService.getCountry(String.valueOf(m.getId())));
@@ -47,11 +48,12 @@ public class MovieController {
         return m;
     }
 
-    @GetMapping("getByIdTitle")
-    Object getByProperties(int id, String title, @RequestParam int pageNum, @RequestParam int pageSize) {
+    @GetMapping("getByIdTitle") Object getByProperties(int id, String title, @RequestParam int pageNum, @RequestParam int pageSize)
+    {
         PageHelper.startPage(pageNum, pageSize);
         List<Movie> moviesGet = moviesService.getMovies(id, title);
-        for (Movie m : moviesGet) {
+        for (Movie m : moviesGet)
+        {
             m.setImagePath(moviesService.getImage(String.valueOf(m.getId())));
             m.setCountry(moviesService.getCountry(String.valueOf(m.getId())));
             m.setGenre(moviesService.getGenres(String.valueOf(m.getId())));
@@ -61,10 +63,11 @@ public class MovieController {
         return new PageInfo<>(moviesGet);
     }
 
-    @GetMapping("getByGenre")
-    List<Movie> getMoviesByGenre(String genre) {
+    @GetMapping("getByGenre") List<Movie> getMoviesByGenre(String genre)
+    {
         List<Movie> movies = moviesService.getMoviesByGenre(genre);
-        for (Movie m : movies) {
+        for (Movie m : movies)
+        {
             m.setImagePath(moviesService.getImage(String.valueOf(m.getId())));
             m.setCountry(moviesService.getCountry(String.valueOf(m.getId())));
             m.setGenre(moviesService.getGenres(String.valueOf(m.getId())));
@@ -74,11 +77,12 @@ public class MovieController {
         return movies;
     }
 
-    @GetMapping("getByYear")
-    Object getByYear(int year, @RequestParam int pageNum, @RequestParam int pageSize) {
+    @GetMapping("getByYear") Object getByYear(int year, @RequestParam int pageNum, @RequestParam int pageSize)
+    {
         PageHelper.startPage(pageNum, pageSize);
         List<Movie> movies = moviesService.getByYear(year);
-        for (Movie m : movies) {
+        for (Movie m : movies)
+        {
             m.setImagePath(moviesService.getImage(String.valueOf(m.getId())));
             m.setCountry(moviesService.getCountry(String.valueOf(m.getId())));
             m.setGenre(moviesService.getGenres(String.valueOf(m.getId())));
@@ -90,33 +94,39 @@ public class MovieController {
         return new PageInfo<>(movies);
     }
 
-    @GetMapping("getImage")
-    String getImage(String id) {
+    @GetMapping("getImage") String getImage(String id)
+    {
         return moviesService.getImage(id);
     }
 
-    @GetMapping("getOverview")
-    String getOverview(String id) {
+    @GetMapping("getOverview") String getOverview(String id)
+    {
         return moviesService.getOverview(id);
     }
 
-    @GetMapping("getLanguage")
-    String getLanguage(String id) {
+    @GetMapping("getLanguage") String getLanguage(String id)
+    {
         return moviesService.getLanguage(id);
     }
 
-    @GetMapping("getCountry")
-    String getCountry(String id) {
+    @GetMapping("getCountry") String getCountry(String id)
+    {
         return moviesService.getCountry(id);
     }
 
-    @GetMapping("getGenres")
-    String getGenres(String id) {
+    @GetMapping("getGenres") String getGenres(String id)
+    {
         return moviesService.getGenres(id);
     }
 
-    @GetMapping("getListByGenre")
-    String getListByGenre(int id,int page) {
-        return moviesService.getListByGenre(id,page);
+    @GetMapping("getListByGenre") String getListByGenre(int id, int page)
+    {
+        return moviesService.getListByGenre(id, page);
+    }
+
+    @GetMapping("convertTMDbtoIMDbId") String convertTMDbtoIMDbId(String tmdbId)
+    {
+        return moviesService.convertTMDbtoIMDbId(tmdbId);
     }
 }
+
