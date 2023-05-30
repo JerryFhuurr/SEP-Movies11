@@ -1,6 +1,7 @@
 package com.movie.movies11.service;
 
 import com.movie.movies11.models.Movie;
+import org.json.JSONArray;
 import org.springframework.boot.configurationprocessor.json.JSONException;
 import org.springframework.stereotype.Service;
 
@@ -28,8 +29,6 @@ public interface MoviesService {
     String getCountry(String id);
 
     String getGenres(String id);
-
-    ArrayList<Integer> getGenresId(String id);
 
     String getListByGenre(int genreId,int page);
 }

@@ -5,6 +5,7 @@ import com.movie.movies11.util.TMDbAPI;
 import com.movie.movies11.models.Movie;
 import com.movie.movies11.service.MoviesService;
 import com.movie.movies11.sqlMapper.MovieMapper;
+import org.json.JSONArray;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -104,17 +105,6 @@ public class MoviesServiceImpl implements MoviesService {
             return tmDbAPI.getGenres(id);
         } catch (Exception e) {
             return e.getMessage();
-        }
-    }
-
-    @Override
-    public ArrayList<Integer> getGenresId(String id) {
-        try {
-            id = IdHandler.idExpandTo7(id);
-            TMDbAPI tmDbAPI = new TMDbAPI();
-            return tmDbAPI.getGenresId(id);
-        } catch (Exception e) {
-            return null;
         }
     }
 

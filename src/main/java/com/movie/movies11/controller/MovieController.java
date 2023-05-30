@@ -5,6 +5,7 @@ import com.github.pagehelper.PageInfo;
 import com.movie.movies11.models.Movie;
 import com.movie.movies11.service.MoviesService;
 import lombok.extern.slf4j.Slf4j;
+import org.json.JSONArray;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -112,11 +113,6 @@ public class MovieController {
     @GetMapping("getGenres")
     String getGenres(String id) {
         return moviesService.getGenres(id);
-    }
-
-    @GetMapping("getGenresId")
-    ArrayList<Integer> getGenresId(String id) {
-        return moviesService.getGenresId(id);
     }
 
     @GetMapping("getListByGenre")
