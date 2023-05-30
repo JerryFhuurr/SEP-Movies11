@@ -15,4 +15,6 @@ public interface MovieMapper {
     List<Movie> getMovies(@Param("id") int id, @Param("title") String title);
 
     List<Movie> getMoviesByLimit(@Param("number") int number);
+
+    List<Movie> getMoviesByYear(@Param("year") int year);
 }

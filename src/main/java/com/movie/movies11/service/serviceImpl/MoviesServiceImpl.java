@@ -47,6 +47,11 @@ public class MoviesServiceImpl implements MoviesService {
     }
 
     @Override
+    public List<Movie> getByYear(int year) {
+        return movieMapper.getMoviesByYear(year);
+    }
+
+    @Override
     public String getImage(String id) {
         try {
             id = IdHandler.idExpandTo7(id);

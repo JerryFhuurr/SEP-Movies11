@@ -17,6 +17,8 @@ public interface MoviesService {
 
     List<Movie> getMovies(int id, String title);
 
+    List<Movie> getByYear(int year);
+
     String getImage(String id);
 
     String getOverview(String id);

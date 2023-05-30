@@ -73,6 +73,22 @@ public class MovieController {
         return movies;
     }
 
+    @GetMapping("getByYear")
+    Object getByYear(int year, @RequestParam int pageNum, @RequestParam int pageSize) {
+        PageHelper.startPage(pageNum, pageSize);
+        List<Movie> movies = moviesService.getByYear(year);
+        for (Movie m : movies) {
+            m.setImagePath(moviesService.getImage(String.valueOf(m.getId())));
+            m.setCountry(moviesService.getCountry(String.valueOf(m.getId())));
+            m.setGenre(moviesService.getGenres(String.valueOf(m.getId())));
+            m.setLanguage(moviesService.getLanguage(String.valueOf(m.getId())));
+            m.setOverview(moviesService.getOverview(String.valueOf(m.getId())));
+        }
+        // total page : 26190 (10 items in one page)
+        // total movie number : 261900
+        return new PageInfo<>(movies);
+    }
+
     @GetMapping("getImage")
     String getImage(String id) {
         return moviesService.getImage(id);

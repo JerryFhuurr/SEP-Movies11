@@ -27,4 +27,10 @@
         SELECT *
         FROM movies LIMIT #{number}
     </select>
+
+    <select id="getMoviesByYear" resultType="com.movie.movies11.models.Movie">
+        SELECT *
+        FROM movies
+        WHERE year = #{year}
+    </select>
 </mapper>
