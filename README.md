@@ -1,6 +1,6 @@
 # SEP-Movies11
-Backend for SEP6 project.
-Example:
+Backend for SEP6 project.  
+Example:  
 Link for getAllMovies: http://sep-db-386814.ew.r.appspot.com/movie/getAll?pageNum=1560&pageSize=10  
 Link for getOneMovie: http://sep-db-386814.ew.r.appspot.com/movie/getOne?id=11493226  
 Link for getSomeMovies: http://sep-db-386814.ew.r.appspot.com/movie/getByIdTitle?pageNum=1&pageSize=10&id=62105&title=Wolf  
